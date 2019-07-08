@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_snc_password_str.Password_Strength</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Based on the XKCD comic: https://xkcd.com/936/&#13;
+This small application will automatically generate a random string of words to be used for easy to recite/remember passwords&#13;
+Example of when to use: A presentor displays the password "SmallChallengeRiseInterview" on screen for the audience to see, the audience then goes onto their device, navigates to the input page and types in "SmallChallengeRiseInterview" to be given access to the record.&#13;
+&#13;
+including functions:&#13;
+new x_snc_password_str.Password_Strength().generate(length) //Generates passwords&#13;
+new x_snc_password_str.Password_Strength().validate(array_of_words) //Validates given password as possible&#13;
+new x_snc_password_str.Password_Strength().find(array_of_words, table_name, variable_name) //Finds record that has this password&#13;
+&#13;
+// 1 word used = 830 possibilities&#13;
+// 2 words used = 688,900 possibilities&#13;
+// 3 words used = 571,787,000 possibilities&#13;
+// 4 words used = 474,583,210,000 possibilities</description>
+        <name>Password_Strength</name>
+        <script><![CDATA[// Based on the XKCD comic: https://xkcd.com/936/
+// This small application will automatically generate a random string of words to be used for easy to recite/remember passwords
+// Example of when to use: A presentor displays the password "SmallChallengeRiseInterview" on screen for the audience to see, the audience then goes onto their device, navigates to the input page and types in "SmallChallengeRiseInterview" to be given access to the record.
+
+var Password_Strength = Class.create();
+Password_Strength.prototype = {
+	initialize: function() {
+		
+		// 1 word used = 830 possibilities
+		// 2 words used = 688,900 possibilities
+		// 3 words used = 571,787,000 possibilities
+		// 4 words used = 474,583,210,000 possibilities
+		// All words below are from the list of "Most commonly used 1000 words" that are longer than 3 letters and shorter than 9 letters.
+		this.words = ["Ability","Able","About","Above","Accept","According","Account","Across","Action","Activity","Actually","Address","Admit","Adult","Affect","After","Again","Against","Agency","Agent","Agree","Agreement","Ahead","Allow","Almost","Alone","Along","Already","Also","Although","Always","American","Among","Amount","Analysis","Animal","Another","Answer","Anyone","Anything","Appear","Apply","Approach","Area","Argue","Around","Arrive","Article","Artist","Assume","Attack","Attention","Attorney","Audience","Author","Authority","Available","Avoid","Away","Baby","Back","Ball","Bank","Base","Beat","Beautiful","Because","Become","Before","Begin","Behavior","Behind","Believe","Benefit","Best","Better","Between","Beyond","Bill","Billion","Black","Blood","Blue","Board","Body","Book","Born","Both","Break","Bring","Brother","Budget","Build","Building","Business","Call","Camera","Campaign","Cancer","Candidate","Capital","Card","Care","Career","Carry","Case","Catch","Cause","Cell","Center","Central","Century","Certain","Certainly","Chair","Challenge","Chance","Change","Character","Charge","Check","Child","Choice","Choose","Church","Citizen","City","Civil","Claim","Class","Clear","Clearly","Close","Coach","Cold","College","Color","Come","Common","Community","Company","Compare","Computer","Concern","Condition","Congress","Consider","Consumer","Contain","Continue","Control","Cost","Could","Country","Couple","Course","Court","Cover","Create","Crime","Cultural","Culture","Current","Customer","Dark","Data","Daughter","Dead","Deal","Death","Debate","Decade","Decide","Decision","Deep","Defense","Degree","Democrat","Describe","Design","Despite","Detail","Determine","Develop","Different","Difficult","Dinner","Direction","Director","Discover","Discuss","Disease","Doctor","Door","Down","Draw","Dream","Drive","Drop","Drug","During","Each","Early","East","Easy","Economic","Economy","Edge","Education","Effect","Effort","Eight","Either","Election","Else","Employee","Energy","Enjoy","Enough","Enter","Entire","Establish","Even","Evening","Event","Ever","Every","Everybody","Everyone","Evidence","Exactly","Example","Executive","Exist","Expect","Expert","Explain","Face","Fact","Factor","Fail","Fall","Family","Fast","Father","Fear","Federal","Feel","Feeling","Field","Fight","Figure","Fill","Film","Final","Finally","Financial","Find","Fine","Finger","Finish","Fire","Firm","First","Fish","Five","Floor","Focus","Follow","Food","Foot","Force","Foreign","Forget","Form","Former","Forward","Four","Free","Friend","From","Front","Full","Fund","Future","Game","Garden","General","Girl","Give","Glass","Goal","Good","Great","Green","Ground","Group","Grow","Growth","Guess","Hair","Half","Hand","Hang","Happen","Happy","Hard","Have","Head","Health","Hear","Heart","Heat","Heavy","Help","Here","Herself","High","Himself","History","Hold","Home","Hope","Hospital","Hotel","Hour","House","However","Huge","Human","Hundred","Husband","Idea","Identify","Image","Imagine","Impact","Important","Improve","Include","Including","Increase","Indeed","Indicate","Industry","Inside","Instead","Interest","Interview","Into","Involve","Issue","Item","Itself","Join","Just","Keep","Kill","Kind","Kitchen","Know","Knowledge","Land","Language","Large","Last","Late","Later","Laugh","Lawyer","Lead","Leader","Learn","Least","Leave","Left","Legal","Less","Letter","Level","Life","Light","Like","Likely","Line","List","Listen","Little","Live","Local","Long","Look","Lose","Loss","Love","Machine","Magazine","Main","Maintain","Major","Majority","Make","Manage","Manager","Many","Market","Marriage","Material","Matter","Maybe","Mean","Measure","Media","Medical","Meet","Meeting","Member","Memory","Mention","Message","Method","Middle","Might","Military","Million","Mind","Minute","Miss","Mission","Model","Modern","Moment","Money","Month","More","Morning","Most","Mother","Mouth","Move","Movement","Movie","Much","Music","Must","Myself","Name","Nation","National","Natural","Nature","Near","Nearly","Necessary","Need","Network","Never","News","Newspaper","Next","Nice","Night","None","North","Note","Nothing","Notice","Number","Occur","Offer","Office","Officer","Official","Often","Once","Only","Onto","Open","Operation","Option","Order","Other","Others","Outside","Over","Owner","Page","Pain","Painting","Paper","Parent","Part","Partner","Party","Pass","Past","Patient","Pattern","Peace","People","Perform","Perhaps","Period","Person","Personal","Phone","Physical","Pick","Picture","Piece","Place","Plan","Plant","Play","Player","Point","Police","Policy","Political","Politics","Poor","Popular","Position","Positive","Possible","Power","Practice","Prepare","Present","President","Pressure","Pretty","Prevent","Price","Private","Probably","Problem","Process","Produce","Product","Professor","Program","Project","Property","Protect","Prove","Provide","Public","Pull","Purpose","Push","Quality","Question","Quickly","Quite","Race","Radio","Raise","Range","Rate","Rather","Reach","Read","Ready","Real","Reality","Realize","Really","Reason","Receive","Recent","Recently","Recognize","Record","Reduce","Reflect","Region","Relate","Religious","Remain","Remember","Remove","Report","Represent","Require","Research","Resource","Respond","Response","Rest","Result","Return","Reveal","Rich","Right","Rise","Risk","Road","Rock","Role","Room","Rule","Safe","Same","Save","Scene","School","Science","Scientist","Score","Season","Seat","Second","Section","Security","Seek","Seem","Sell","Send","Senior","Sense","Series","Serious","Serve","Service","Seven","Several","Sexual","Shake","Share","Shoot","Short","Shot","Should","Shoulder","Show","Side","Sign","Similar","Simple","Simply","Since","Sing","Single","Sister","Site","Situation","Size","Skill","Skin","Small","Smile","Social","Society","Soldier","Some","Somebody","Someone","Something","Sometimes","Song","Soon","Sort","Sound","Source","South","Southern","Space","Speak","Special","Specific","Speech","Spend","Sport","Spring","Staff","Stage","Stand","Standard","Star","Start","State","Statement","Station","Stay","Step","Still","Stock","Stop","Store","Story","Strategy","Street","Strong","Structure","Student","Study","Stuff","Style","Subject","Success","Such","Suddenly","Suffer","Suggest","Summer","Support","Sure","Surface","System","Table","Take","Talk","Task","Teach","Teacher","Team","Tell","Tend","Term","Test","Than","Thank","That","Their","Them","Then","Theory","There","These","They","Thing","Think","Third","This","Those","Though","Thought","Thousand","Threat","Three","Through","Throw","Thus","Time","Today","Together","Tonight","Total","Tough","Toward","Town","Trade","Training","Travel","Treat","Treatment","Tree","Trial","Trip","Trouble","True","Truth","Turn","Type","Under","Unit","Until","Upon","Usually","Value","Various","Very","Victim","View","Violence","Visit","Voice","Vote","Wait","Walk","Wall","Want","Watch","Water","Weapon","Wear","Week","Weight","Well","West","Western","What","Whatever","When","Where","Whether","Which","While","White","Whole","Whom","Whose","Wide","Wife","Will","Wind","Window","Wish","With","Within","Without","Woman","Wonder","Word","Work","Worker","World","Worry","Would","Write","Writer","Wrong","Yard","Yeah","Year","Young","Your","Yourself"];
+	},
+
+	generate: function(length){
+		//
+		// This function will generate the password according to these parameters:
+		// length (integer, optional): how many words to generate for the password (default: 4)
+		//
+		
+		// default declarations and parameter overrides
+		var total_words = 4;
+		if (length && length > 0) total_words = length;
+
+		// Building of the randomly generated password
+		var password = {};
+		password.answer = [];
+		for (var x = 0; x < total_words; x++){
+			password.answer.push(this.words[Math.floor(Math.random() * this.words.length)]);
+		}
+		password.string = password.answer.join(' ');
+		return password;
+	},
+
+	validate: function(array_of_words){
+		//
+		// This function will validate if all words in a given password exist as possible words:
+		// array_of_words (array, required): must provide a JavaScript array of words to validate.
+			// for example: var x = ["Account","Determine","Indeed","Forget","Possible"]; // x would be valid
+			// Case does not matter (Account, account, ACCOUNT, AcCoUnT all work)
+		//
+		if (array_of_words.length > 0){
+			for (var x in array_of_words){
+				var current_word = array_of_words[x].charAt(0).toUpperCase() + array_of_words[x].slice(1).toLowerCase();
+				if (this.words.indexOf(current_word) == -1) return false;
+			}
+			return true;
+		} else return false; //Not a valid array of words
+	},
+
+	find: function(array_of_words, table_name, variable_name){
+		//
+		// This function will attempt to find the sys_id of a record that matches a given password on the given table
+		//
+		// array_of_words (array, required): must provide a JavaScript array of words to validate.
+			// for example: var x = ["Account","Determine","Indeed","Forget","Possible"]; // x would be valid
+			// Case does not matter (Account, account, ACCOUNT, AcCoUnT all work)
+		// table_name (string, required): must provide the table name that the record should exist on
+		// variable_name (string, optional): provide the variable name that has the password stored in it (default: password)
+		//
+		
+		if (array_of_words.length > 0){
+			if (!table_name) return 'Parameter 2 requires a table name';
+			variable_name = 'password';
+			if (variable_name) variable_name = variable_name;
+			var find_gr = new GlideRecord(table_name);
+			if (find_gr.get(variable_name, array_of_words.join(''))){
+				return find_gr.getUniqueValue();
+			} else return false; //No record found
+		} else return false; //Not a valid array of words
+
+	},
+
+	type: 'Password_Strength'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin-eduque</sys_created_by>
+        <sys_created_on>2019-07-08 21:43:27</sys_created_on>
+        <sys_id>78972cdd4f6233804b00cfa18110c7f7</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>Password_Strength</sys_name>
+        <sys_package display_value="Password Strength" source="x_snc_password_str">f187a0dd4f6233804b00cfa18110c7d8</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Password Strength">f187a0dd4f6233804b00cfa18110c7d8</sys_scope>
+        <sys_update_name>sys_script_include_78972cdd4f6233804b00cfa18110c7f7</sys_update_name>
+        <sys_updated_by>admin-eduque</sys_updated_by>
+        <sys_updated_on>2019-07-08 23:17:00</sys_updated_on>
+    </sys_script_include>
+</record_update>
