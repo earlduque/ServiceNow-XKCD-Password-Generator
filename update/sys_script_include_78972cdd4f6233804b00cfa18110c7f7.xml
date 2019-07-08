@@ -18,11 +18,15 @@ new x_snc_password_str.Password_Strength().find(array_of_words, table_name, vari
 // 1 word used = 830 possibilities&#13;
 // 2 words used = 688,900 possibilities&#13;
 // 3 words used = 571,787,000 possibilities&#13;
-// 4 words used = 474,583,210,000 possibilities</description>
+// 4 words used = 474,583,210,000 possibilities&#13;
+&#13;
+Created by Earl Duque</description>
         <name>Password_Strength</name>
         <script><![CDATA[// Based on the XKCD comic: https://xkcd.com/936/
 // This small application will automatically generate a random string of words to be used for easy to recite/remember passwords
+// Example of result: ConditionQuicklyFloorVoice
 // Example of when to use: A presentor displays the password "SmallChallengeRiseInterview" on screen for the audience to see, the audience then goes onto their device, navigates to the input page and types in "SmallChallengeRiseInterview" to be given access to the record.
+// Created by Earl Duque
 
 var Password_Strength = Class.create();
 Password_Strength.prototype = {
@@ -101,13 +105,13 @@ Password_Strength.prototype = {
         <sys_created_by>admin-eduque</sys_created_by>
         <sys_created_on>2019-07-08 21:43:27</sys_created_on>
         <sys_id>78972cdd4f6233804b00cfa18110c7f7</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>23</sys_mod_count>
         <sys_name>Password_Strength</sys_name>
         <sys_package display_value="Password Strength" source="x_snc_password_str">f187a0dd4f6233804b00cfa18110c7d8</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Password Strength">f187a0dd4f6233804b00cfa18110c7d8</sys_scope>
         <sys_update_name>sys_script_include_78972cdd4f6233804b00cfa18110c7f7</sys_update_name>
         <sys_updated_by>admin-eduque</sys_updated_by>
-        <sys_updated_on>2019-07-08 23:22:22</sys_updated_on>
+        <sys_updated_on>2019-07-08 23:29:49</sys_updated_on>
     </sys_script_include>
 </record_update>
